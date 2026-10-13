@@ -1,4 +1,4 @@
-# Latch — pay for checked results
+# Latch :  pay for checked results
 
 **A small settlement primitive for applications that buy machine-checkable work from agents.** Commit a budget and acceptance policy, inspect the delivered result, and settle only when the buyer accepts it. The first reference application purchases structured GPU quote data. It does **not** buy, reserve, insure, or verify the delivery of GPU capacity.
 
@@ -97,8 +97,9 @@ Public repository, hosted product, deployed contract, and public video links mus
 
 ## Published build and evidence
 
-- Public source: https://github.com/shi1720/latch-monad
-- Product: https://latch-agent-receipts.sg127977958.chatgpt.site
+- Public source: [GitHub repository](https://github.com/shi1720/latch-monad)
+- Primary product: [Firebase hosted application](https://latch-agent-receipts.web.app)
+- Secondary mirror: [Sites hosted application](https://latch-agent-receipts.sg127977958.chatgpt.site)
 - Deployment: `0xcfeb00b37333b3f4397eed2790e2869a40ffb871`, Monad testnet (10143).
 - Reproducible real transactions: [`public/live-evidence.json`](public/live-evidence.json), including provider withdrawal, buyer refund withdrawal, and replay rejection. These are automated integration trials, not user traction.
 - SDK integration guide: [docs/SDK.md](docs/SDK.md). Use a durable request ID and persist `onBroadcast` hashes before waiting for receipts.
@@ -110,3 +111,23 @@ No login credentials or paid API keys are needed. Run local acceptance checks wi
 The workbench preflights sample output before reserving funds for an inspectable demonstration. For actual supplier integrations, the SDK `open` operation commits policy and budget **before** calling the supplier; see the two example agent functions. Output schemas and timestamps remain supplier claims. The browser persists an unfinished purchase and reuses its identity on retry. Do not clear browser storage while recovering a pending transaction.
 
 Development dependencies include Ganache's legacy dependency tree with known npm advisories; Ganache is used only in isolated local tests and is not shipped in the static production bundle. Do not expose a Ganache server publicly. This release is a tested testnet developer preview, not a mainnet-audited financial product.
+
+## Hosting and submission status
+
+Firebase project creation was blocked by project quota. Hosting therefore uses the newly created isolated `latch-agent-receipts` site in the existing defaultGemini project (`gen-lang-client-0444960702`). The deployment targets only that named site; no other deployment was modified. See `firebase.json` and `scripts/deploy-firebase.sh` for the precise target.
+
+The user-provided DevpostRice route redirected to closed submission pages. No submission fields were saved and no completed submission is claimed. Prepared story copy, judge testing instructions, narration, captions, and YouTube metadata are available in the sibling `outputs/submission/` deliverables folder. Public video URLs and an accepted submission confirmation remain separate requirements.
+
+## Firebase hosting and regression checks
+
+Primary product URL: **https://latch-agent-receipts.web.app**.
+
+The separate `latch-agent-receipts` Hosting site is contained in the existing `gen-lang-client-0444960702` Firebase project because the Google Cloud account reached its project-creation quota. The deployment targets only this site; it does not replace another site's release. No billing account was added for this deployment.
+
+```sh
+npm run test:browser
+npm run test:hosted
+npm run deploy:firebase
+```
+
+Firebase deployment requires an authenticated Firebase CLI account with access to that project. The script runs a clean install, core tests, and a production build before deployment. See [docs/TESTING.md](docs/TESTING.md) for browser installation, coverage, and limits. The GitHub workflow checks the contract, SDK, production build, and browser suite on `main`.

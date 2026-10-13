@@ -2,7 +2,7 @@
 
 Project lead and speaker: Shivam Gupta. Read the scripts verbatim only after confirming that the corresponding flow works. Record the real hosted application and actual Monad transactions. Never speed up or splice a transaction in a way that implies faster settlement. Conceal private keys and unrelated account details. Add captions if possible.
 
-## Technical demo — target 2:35, hard limit 3:00
+## Technical demo :  target 2:35, hard limit 3:00
 
 Approximately 325 words. Rehearse once; transaction waits are the main variable. If needed, prepare funded testnet accounts and a fresh job before recording. Show existing real receipts rather than inventing successful transactions during a network outage.
 
@@ -32,16 +32,16 @@ Latch makes agent spending reviewable: agree on the rules, inspect the result, a
 
 | Time budget | Screen/action | Evidence to capture |
 | --- | --- | --- |
-| 0:00–0:20 | Product overview | Name and real running application |
-| 0:20–0:45 | Policy and example result | Region, price cap, freshness; illustrative-data label |
-| 0:45–1:25 | Passing result and funded acceptance | Wallet approval, confirmed state, explorer receipt |
-| 1:25–2:00 | Failing result; refund; withdraw | Failed check, separate refund and withdrawal confirmations |
-| 2:00–2:20 | Receipt details and trust boundary | Artifact/policy commitments, native MON, buyer verifier |
-| 2:20–2:35 | Product overview / integration panel | Closing statement |
+| 0:00-0:20 | Product overview | Name and real running application |
+| 0:20-0:45 | Policy and example result | Region, price cap, freshness; illustrative-data label |
+| 0:45-1:25 | Passing result and funded acceptance | Wallet approval, confirmed state, explorer receipt |
+| 1:25-2:00 | Failing result; refund; withdraw | Failed check, separate refund and withdrawal confirmations |
+| 2:00-2:20 | Receipt details and trust boundary | Artifact/policy commitments, native MON, buyer verifier |
+| 2:20-2:35 | Product overview / integration panel | Closing statement |
 
 Refund is available only after expiry. Prepare a short-deadline test job and wait for expiry before the recovery segment. If the rejected-flow transactions exceed the budget, use a previously completed real rejected job and show its refund and withdrawal explorer receipts while explaining the two steps. Clearly state that it is an earlier completed test. The video must remain actual operation, not slides or a code walkthrough.
 
-## Pitch video — target 1:40, hard limit 2:00
+## Pitch video :  target 1:40, hard limit 2:00
 
 Approximately 235 words. Camera introduction plus a few product shots; this is separate from the technical demo.
 
@@ -67,13 +67,13 @@ Pay for checked results. That's Latch.”
 
 ### Shot list
 
-- 0:00–0:12: Shivam on camera; name and project lead title.
-- 0:12–0:40: Real policy and failing-result screen.
-- 0:40–1:05: Real acceptance/refund receipts.
-- 1:05–1:25: Speaker explaining first users and business hypothesis.
-- 1:25–1:40: Running product and closing line.
+- 0:00-0:12: Shivam on camera; name and project lead title.
+- 0:12-0:40: Real policy and failing-result screen.
+- 0:40-1:05: Real acceptance/refund receipts.
+- 1:05-1:25: Speaker explaining first users and business hypothesis.
+- 1:25-1:40: Running product and closing line.
 
-## Optional advertisement — approximately 20 seconds
+## Optional advertisement :  approximately 20 seconds
 
 “Your agent bought the data. Was it usable? Latch checks the rules you agreed: region, price, freshness. See the result. Accept the delivery. Follow the payment on Monad. For developers building accountable agent workflows. Latch: pay for checked results.”
 

@@ -11,7 +11,10 @@
     "build": "tsc --noEmit && vite build",
     "test": "tsx --test test/*.test.mjs test/*.test.ts",
     "compile": "node scripts/compile.mjs",
-    "deploy": "node scripts/deploy.mjs"
+    "deploy": "node scripts/deploy.mjs",
+    "test:browser": "playwright test",
+    "test:hosted": "PLAYWRIGHT_BASE_URL=https://latch-agent-receipts.web.app playwright test",
+    "deploy:firebase": "bash scripts/deploy-firebase.sh"
   },
   "keywords": [],
   "author": "",

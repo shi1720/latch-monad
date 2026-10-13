@@ -1,6 +1,6 @@
 # Integrating Latch
 
-`sdk/client.ts` is a reusable native-currency escrow client. Supply your own viem wallet and public clients, deployed escrow address, and compiled ABI. Latch never generates a wallet, reads a private key, or stores one.
+`sdk/client.ts` is a reusable native-currency escrow client. Supply your own viem wallet and public clients, deployed escrow address, and compiled ABI. The SDK never generates a wallet, reads a private key, or stores one. The reference browser application separately supports a generated test-only wallet stored in tab session storage; that demonstration onboarding is not SDK key management.
 
 ```ts
 import { createLatchClient } from './sdk/client.ts';

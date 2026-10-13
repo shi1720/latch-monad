@@ -44,7 +44,7 @@ Shivam Gupta is project lead and product owner. The project uses substantial Ope
 
 No external customer traction or developer adoption is claimed. Automated checks and testnet transactions are engineering evidence rather than users or revenue. The next milestone is two independently operated application integrations and 1,000 measured test jobs, followed by a willingness-to-pay experiment for hosted receipts and monitoring.
 
-## Final links — fill from verified results
+## Final links :  fill from verified results
 
 | Required item | Current source of truth |
 | --- | --- |
@@ -76,11 +76,18 @@ Sponsor bounties should be selected only after meeting their actual published re
 
 ## Verified build links
 
-- Source: https://github.com/shi1720/latch-monad
-- Product: https://latch-agent-receipts.sg127977958.chatgpt.site (public hosting verification recorded separately)
+- Source: [GitHub repository](https://github.com/shi1720/latch-monad)
+- Primary product: [Firebase hosted application](https://latch-agent-receipts.web.app)
+- Secondary mirror: [Sites hosted application](https://latch-agent-receipts.sg127977958.chatgpt.site)
 - Contract: https://testnet.monadscan.com/address/0xcfeb00b37333b3f4397eed2790e2869a40ffb871
 - Deployment transaction: https://testnet.monadscan.com/tx/0xf818227f6219893732734b4d260d1edb776a0cd91b22e9dbd6b930355e8918d3
 - Real success/refund/withdrawal evidence: `public/live-evidence.json`
 - Logo: `public/logo.png`
 
 Video links and participant declarations remain incomplete until supplied by Shivam. Do not treat a recorded silent screen capture as an uploaded, narrated public submission video.
+
+## Hosting and submission status
+
+Firebase project creation was blocked by project quota. Hosting therefore uses the newly created isolated `latch-agent-receipts` site in the existing defaultGemini project (`gen-lang-client-0444960702`). The deployment targets only that named site; no other deployment was modified. See `firebase.json` and `scripts/deploy-firebase.sh` for the precise target.
+
+The user-provided DevpostRice route redirected to closed submission pages. No submission fields were saved and no completed submission is claimed. Prepared story copy, judge testing instructions, narration, captions, and YouTube metadata are available in the sibling `outputs/submission/` deliverables folder. Public video URLs and an accepted submission confirmation remain separate requirements.

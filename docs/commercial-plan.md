@@ -1,4 +1,4 @@
-# Commercial plan — a testable wedge
+# Commercial plan :  a testable wedge
 
 ## First user and first job
 
