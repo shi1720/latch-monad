@@ -51,3 +51,7 @@ Keep policies immutable for each funded job. A new policy should create a new co
 ## Production work still required
 
 Independent contract review; deployment-bytecode verification; monitored RPC redundancy; authenticated supplier adapters; acceptance-policy versioning and compatibility tests; operational alerting; a fair settlement process for suppliers; appropriate stablecoin implementation and token-specific safety review; rate limits and abuse controls for any hosted verifier. These are explicit follow-on requirements, not claims of completed production readiness.
+
+## Validator release agreement
+
+The onchain policy commitment hashes the policy bytes. It does not pin a JavaScript validator implementation. Integrators must agree on the SDK release or Git commit out of band and preserve that version alongside their acceptance receipts. A future policy format can bind a validator version explicitly; this release does not claim to enforce code semantics onchain.

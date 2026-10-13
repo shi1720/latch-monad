@@ -131,3 +131,10 @@ npm run deploy:firebase
 ```
 
 Firebase deployment requires an authenticated Firebase CLI account with access to that project. The script runs a clean install, core tests, and a production build before deployment. See [docs/TESTING.md](docs/TESTING.md) for browser installation, coverage, and limits. The GitHub workflow checks the contract, SDK, production build, and browser suite on `main`.
+
+## Product videos
+
+- [Technical demo, 1:53](https://www.youtube.com/watch?v=PioZkd00OZY)
+- [Product pitch, 1:30](https://www.youtube.com/watch?v=fmQ5vGBern4)
+
+Both show real product footage with synthesized narration and captions. [Release verification](docs/RELEASE.md) records the checks and material limits.

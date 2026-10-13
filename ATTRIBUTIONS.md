@@ -33,3 +33,9 @@ No claim is made to the Monad or hackathon marks. Third-party names appear solel
 - Nevermined: https://nevermined.ai/
 
 These references informed positioning. Latch does not claim to implement or integrate those competitor protocols unless the source explicitly does so.
+
+## Media and typography
+
+Product narration uses the Andrew neural voice through the `edge-tts` client. It is synthesized narration, not a recording or clone of Shivam Gupta. Demo footage records actual product operation. Captions and the logo graphic were produced from project-owned text and code.
+
+The interface requests DM Sans and Manrope through Google Fonts. Their font families are distributed under the SIL Open Font License; no paid stock imagery is used.
