@@ -73,3 +73,14 @@ No external customer traction or developer adoption is claimed. Automated checks
 - [ ] Form submitted before the website deadline; save the confirmation and revisit the recorded submission to verify all links.
 
 Sponsor bounties should be selected only after meeting their actual published requirements. This release does not claim a bounty merely because it uses Monad or can support a future integration.
+
+## Verified build links
+
+- Source: https://github.com/shi1720/latch-monad
+- Product: https://latch-agent-receipts.sg127977958.chatgpt.site (public hosting verification recorded separately)
+- Contract: https://testnet.monadscan.com/address/0xcfeb00b37333b3f4397eed2790e2869a40ffb871
+- Deployment transaction: https://testnet.monadscan.com/tx/0xf818227f6219893732734b4d260d1edb776a0cd91b22e9dbd6b930355e8918d3
+- Real success/refund/withdrawal evidence: `public/live-evidence.json`
+- Logo: `public/logo.png`
+
+Video links and participant declarations remain incomplete until supplied by Shivam. Do not treat a recorded silent screen capture as an uploaded, narrated public submission video.

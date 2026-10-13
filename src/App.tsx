@@ -14,11 +14,12 @@ const loadReceipts = (): Receipt[] => { try { const stored = JSON.parse(localSto
 const download = (data: unknown, filename: string) => { const u = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })); const a = document.createElement('a'); a.href = u; a.download = filename; a.click(); URL.revokeObjectURL(u); };
 
 function Mark({ small = false }: { small?: boolean }) { return <span className={`latch-mark ${small ? 'small' : ''}`} aria-hidden="true"><span /><span /></span>; }
+function recovery(){try{return JSON.parse(localStorage.getItem('latch-active-purchase')||'null')}catch{return null}}
 function App() {
   const [view, setView] = useState<View>('workbench');
   const [mode, setMode] = useState<Mode>('valid');
-  const [payloadText, setPayloadText] = useState(() => JSON.stringify(makeSample('valid'), null, 2));
-  const [policy, setPolicy] = useState<Policy>({ maxAgeSeconds: 300, maxPriceUsd: 4, region: 'us-east' });
+  const [payloadText, setPayloadText] = useState(() => JSON.stringify(recovery()?.payload||makeSample('valid'), null, 2));
+  const [policy, setPolicy] = useState<Policy>(()=>recovery()?.policy||{ maxAgeSeconds: 300, maxPriceUsd: 4, region: 'us-east' });
   const [validation, setValidation] = useState<Validation | null>(null);
   const [digest, setDigest] = useState('');
   const [policyDigest, setPolicyDigest] = useState('');

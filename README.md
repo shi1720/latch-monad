@@ -94,3 +94,19 @@ Small jobs should not require a long settlement wait or a large minimum payment.
 The source license is [MIT](LICENSE). Libraries and AI assistance are disclosed in [ATTRIBUTIONS.md](ATTRIBUTIONS.md). The Git history records actual development during the build window; do not backdate commits or imply that a fixture is commercial usage.
 
 Public repository, hosted product, deployed contract, and public video links must be verified before submission. Contract details belong in `public/deployment.json`; final URLs belong in the submission form and [submission checklist](docs/submission.md). A working local build does not complete those external requirements.
+
+## Published build and evidence
+
+- Public source: https://github.com/shi1720/latch-monad
+- Product: https://latch-agent-receipts.sg127977958.chatgpt.site
+- Deployment: `0xcfeb00b37333b3f4397eed2790e2869a40ffb871`, Monad testnet (10143).
+- Reproducible real transactions: [`public/live-evidence.json`](public/live-evidence.json), including provider withdrawal, buyer refund withdrawal, and replay rejection. These are automated integration trials, not user traction.
+- SDK integration guide: [docs/SDK.md](docs/SDK.md). Use a durable request ID and persist `onBroadcast` hashes before waiting for receipts.
+
+### Judge access
+
+No login credentials or paid API keys are needed. Run local acceptance checks without an account. For onchain writes, connect your EVM wallet, or use the browser-generated test wallet when no extension is present. The app requests free testnet MON from a public faucet; availability and rate limits are outside our control. This test wallet's private key remains in this tab's `sessionStorage`; closing the tab can make it inaccessible. Never use it for valuable funds. Wallet connection identifies the settlement account; this static app has no server-side identity session.
+
+The workbench preflights sample output before reserving funds for an inspectable demonstration. For actual supplier integrations, the SDK `open` operation commits policy and budget **before** calling the supplier; see the two example agent functions. Output schemas and timestamps remain supplier claims. The browser persists an unfinished purchase and reuses its identity on retry. Do not clear browser storage while recovering a pending transaction.
+
+Development dependencies include Ganache's legacy dependency tree with known npm advisories; Ganache is used only in isolated local tests and is not shipped in the static production bundle. Do not expose a Ganache server publicly. This release is a tested testnet developer preview, not a mainnet-audited financial product.
