@@ -1,0 +1,11 @@
+{
+  "chainId": 10143,
+  "address": "0xcfeb00b37333b3f4397eed2790e2869a40ffb871",
+  "provider": "0x7303eE693158f0A10491d140A3891B6086704892",
+  "deployer": "0x7303eE693158f0A10491d140A3891B6086704892",
+  "transactionHash": "0xf818227f6219893732734b4d260d1edb776a0cd91b22e9dbd6b930355e8918d3",
+  "blockNumber": "70589978",
+  "rpcUrl": "https://testnet-rpc.monad.xyz",
+  "explorer": "https://testnet.monadscan.com",
+  "deployedAt": "2026-10-13T04:41:34.650Z"
+}

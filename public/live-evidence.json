@@ -1,0 +1,74 @@
+{
+  "chainId": 10143,
+  "escrow": "0xcfeb00b37333b3f4397eed2790e2869a40ffb871",
+  "buyer": "0x6cC1eef5087f09f73132E0e657FBc1d82D6d3A62",
+  "provider": "0x7303eE693158f0A10491d140A3891B6086704892",
+  "transactions": [
+    {
+      "label": "Fund isolated integration buyer",
+      "hash": "0x9667bfe205b413d63b0a2d6ff43c709b38e9bba219284a07cc66abd6cfaaaa13",
+      "block": "70590617",
+      "gasUsed": "21165"
+    },
+    {
+      "label": "open",
+      "hash": "0xbc15a96ea52713afb8a4411e586666d2eb52901744bd29fc46365016e3a15cc2",
+      "block": "70590630",
+      "gasUsed": "125324"
+    },
+    {
+      "label": "accept",
+      "hash": "0xa4ca609859984509c5b97b514eabe381ed6357d43422f62765179f4d93ec0f54",
+      "block": "70590642",
+      "gasUsed": "82229"
+    },
+    {
+      "label": "withdraw",
+      "hash": "0x5cd69d0344f3c91f0331ede6a40e052cb82487f7987f85e25f77cd4ed603d79e",
+      "block": "70590652",
+      "gasUsed": "52693"
+    },
+    {
+      "label": "open",
+      "hash": "0x1f75c3baf02047d6f0de5d5c22e6e6485ec68b81e0a9de553b2f68a8fcf13f40",
+      "block": "70590666",
+      "gasUsed": "125324"
+    },
+    {
+      "label": "refund",
+      "hash": "0xeae3543a3e0ffe68d25c2d7b87398566ce3e83a53eed77d12c30cbc1f25199f9",
+      "block": "70590700",
+      "gasUsed": "64140"
+    },
+    {
+      "label": "withdraw",
+      "hash": "0x3f4c22c6f7b8811a88567289fec4614e98fb19370b109fb90372b3e3bf1fd44a",
+      "block": "70590711",
+      "gasUsed": "52693"
+    }
+  ],
+  "assertions": [
+    {
+      "key": "0x3fb3e2a3913f8c2e870d3aafebab0aa5878583845c8ffa3d437bf971352e056d",
+      "status": "Accepted and provider withdrew",
+      "passed": true
+    },
+    {
+      "key": "0x3fb3e2a3913f8c2e870d3aafebab0aa5878583845c8ffa3d437bf971352e056d",
+      "status": "Duplicate request rejected",
+      "passed": true
+    },
+    {
+      "key": "0x4335f22920e1742ce8e1a8702e27de4265b3e5db183a1bc43de910071c0f7c97",
+      "status": "Refunded and buyer withdrew",
+      "passed": true
+    },
+    {
+      "key": "0x4335f22920e1742ce8e1a8702e27de4265b3e5db183a1bc43de910071c0f7c97",
+      "status": "Duplicate request rejected",
+      "passed": true
+    }
+  ],
+  "startedAt": "2026-10-13T04:44:46.625Z",
+  "completedAt": "2026-10-13T04:45:20.241Z"
+}
