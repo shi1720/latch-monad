@@ -102,7 +102,7 @@ Public repository, hosted product, deployed contract, and public video links mus
 - Public source: [GitHub repository](https://github.com/shi1720/latch-monad)
 - Primary product: [Firebase hosted application](https://latch-agent-receipts.web.app)
 - Deployment: `0xcfeb00b37333b3f4397eed2790e2869a40ffb871`, Monad testnet (10143).
-- Reproducible real transactions: [`public/live-evidence.json`](public/live-evidence.json), including provider withdrawal, buyer refund withdrawal, and replay rejection. These are automated integration trials, not user traction.
+- Reproducible real transactions: [`public/live-evidence.json`](public/live-evidence.json), including provider withdrawal, buyer refund withdrawal, and replay rejection. The live pricing run is in [`public/live-pricing-evidence.json`](public/live-pricing-evidence.json), with an accepted Vast.ai artifact and independently checked contract commitments. These are automated integration trials, not user traction.
 - SDK integration guide: [docs/SDK.md](docs/SDK.md). Use a durable request ID and persist `onBroadcast` hashes before waiting for receipts.
 
 ### Judge access
@@ -134,8 +134,8 @@ Firebase deployment requires an authenticated Firebase CLI account with access t
 
 ## Product videos
 
-- [Technical demo, 1:53](https://www.youtube.com/watch?v=PioZkd00OZY)
-- [Product pitch, 1:30](https://www.youtube.com/watch?v=fmQ5vGBern4)
+- [Technical demo, 2:07](https://www.youtube.com/watch?v=1o65p1IbhSQ)
+- [Product pitch, 1:37](https://www.youtube.com/watch?v=12_AjRvL2SU)
 
 Both show real product footage with synthesized narration and captions. [Release verification](docs/RELEASE.md) records the checks and material limits.
 

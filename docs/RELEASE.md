@@ -24,3 +24,10 @@ Anonymous Vast.ai search worked during integration but is not a promised provide
 Retrieval time is not provider update time. Listings are not reservations. GPU source claims are not independently verified. The free marketplace browser and the 0.001 testnet MON adapter payment are distinct; neither purchases compute capacity. Fees and final provider billing can differ.
 
 The buyer authorizes acceptance. Providers must trust buyer fairness. Native testnet MON only; unaudited developer release. No independent security audit, paying customers, external integration traction, or mainnet readiness is claimed.
+
+## Final verification
+
+24 core, SDK and adapter tests passed. 35 browser regressions passed locally and against the Firebase release. Linux CI passed on commit `27919d5`. Actual recorded live runs fetched Vast.ai listings and completed acceptance and rejected-fixture refunds without JavaScript errors. `scripts/verify-pricing-evidence.ts` independently checked onchain terms, artifact commitments, and successful transaction receipts. The adapter provider withdrew its accumulated credits.
+
+- [Technical demo, 2:07](https://www.youtube.com/watch?v=1o65p1IbhSQ)
+- [Product pitch, 1:37](https://www.youtube.com/watch?v=12_AjRvL2SU)
