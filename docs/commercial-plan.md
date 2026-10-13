@@ -2,7 +2,7 @@
 
 ## First user and first job
 
-The first user is a developer building a procurement or research agent that purchases structured supplier data. The first job is a GPU quote dataset: the buyer needs a specific region, a maximum quoted price, and a freshness window before it can compare offers. The purchase is information, not GPU capacity. This keeps the acceptance conditions legible and avoids pretending that a smart contract can verify a physical machine's availability.
+The first user is a developer building a procurement or research agent that purchases structured supplier data. The first job is a GPU quote dataset: the buyer needs a specific region, a maximum quoted price, and a freshness window before it can compare offers. The reference purchase is information, not GPU capacity. The default application retrieves actual Vast.ai H100 offers through its backend, with exact country geography and per-GPU normalization that preserves full-machine cost. This keeps the acceptance conditions legible and avoids pretending that a smart contract can verify a physical machine's availability.
 
 The immediate value is an inspectable answer to “what did my agent accept and pay for?” A task owner can see the committed rules, checks, artifact commitment, payment, and recovery path. The developer can reuse these interfaces across suppliers rather than hiding acceptance logic inside a single prompt.
 
@@ -47,3 +47,11 @@ Defensibility would come from useful adapters, acceptance-policy compatibility, 
 ## Stop conditions
 
 Do not pursue the hosted business if developers cannot name costly acceptance failures, if suppliers will not tolerate buyer-controlled release, or if ordinary payment plus an in-house validator solves the problem with less friction. An independent verifier or dispute process could address supplier fairness later, but would introduce new trust and operational obligations. It is not part of this implementation.
+
+## Real data integration and remaining business question
+
+The Vast.ai adapter makes the reference useful for inspecting actual marketplace offers rather than defaulting to illustrative prices. It does not establish a supplier partnership, exclusive data access, or a right to resell provider data. The public quote API is a technical integration, not external adoption of Latch.
+
+Users can access Vast.ai marketplace prices directly. Latch must therefore earn its value through acceptance workflow, reconciliation, and developer time saved, not by implying that public prices are proprietary. The onchain reference fee is not a Vast.ai rental payment. Any commercial paid-data service would need appropriate source terms and a clearly described value beyond the free source.
+
+Operational economics now include Cloud Run requests, upstream rate limits, cache behavior, and optional provider authentication. The 30-second cache reduces repeated upstream requests but is not a performance or cost guarantee. Provider failures surface as errors, not fabricated fallback offers. No measured adoption, cost savings, uptime, or response-time benchmark is claimed.

@@ -9,3 +9,5 @@ export function monadReader(rpc='https://testnet-rpc.monad.xyz'){return createPu
 export type AcceptanceReceipt={chainId:10143;escrow:Address;key:Hex;policyHash:Hex;resultHash:Hex;transactionHash:Hex;status:'Accepted'|'Refunded'};
 export {createLatchClient,LatchPendingTransactionError} from './client.ts';
 export type {LatchJob,LatchClientOptions,Broadcast} from './client.ts';
+
+export {fetchLiveQuote} from "./quotes.ts";

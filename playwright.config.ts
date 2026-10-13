@@ -3,7 +3,7 @@ import path from 'node:path';
 
 export default defineConfig({
   testDir: './test',
-  testMatch: 'browser.spec.ts',
+  testMatch: /.*browser\.spec\.ts/,
   outputDir: path.resolve(import.meta.dirname, '../../work/playwright-artifacts'),
   fullyParallel: true,
   workers: 3,

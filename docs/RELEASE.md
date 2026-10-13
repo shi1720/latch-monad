@@ -1,31 +1,26 @@
-# Latch release verification
+# Release verification
 
-## Public product and source
+Primary product: https://latch-agent-receipts.web.app
+Source: https://github.com/shi1720/latch-monad
 
-- Product: https://latch-agent-receipts.web.app
-- Source: https://github.com/shi1720/latch-monad
-- Technical demo: https://www.youtube.com/watch?v=PioZkd00OZY
-- Pitch: https://www.youtube.com/watch?v=fmQ5vGBern4
-- Network: Monad testnet, chain ID 10143
-- Contract: `0xcfeb00b37333b3f4397eed2790e2869a40ffb871`
+## Live pricing upgrade
 
-The technical demo is 1 minute 53 seconds, with natural neural narration, burned-in captions, and an uploaded English subtitle track. The separate pitch is 1 minute 30 seconds. Narration is synthesized and does not impersonate the project lead.
+The default workbench now retrieves actual H100 marketplace offers from Vast.ai through a dependency-free Cloud Run adapter and Firebase same-origin rewrite. The source response is bounded, cached for 30 seconds, normalized to exact country codes, and explicit about instance and per-GPU prices. A source outage is shown as a retryable error; synthetic prices and expired cache are never substituted.
 
-## Completed verification
+The application supports offer filtering, source offer IDs, source export, selection into a policy, real Monad testnet settlement, live artifact inspection in receipts, and recovery of interrupted purchases. Sandbox fixtures remain explicitly labeled safety-test inputs. The SDK includes `fetchLiveQuote` and a reserve-before-fetch live integration example.
 
-- 11 core contract, policy, and SDK tests passed.
-- 22 browser regressions passed locally and against the public Firebase deployment.
-- Real hosted browser transactions captured successful acceptance and expired refund followed by buyer withdrawal, with no JavaScript errors.
-- Earlier live integration trials include provider withdrawal and permanent duplicate-request rejection.
-- Clean installation, tests, production build, and a deployment targeting only `latch-agent-receipts` completed.
-- Linux GitHub CI passed after correcting optional platform metadata for Ganache's macOS file watcher.
-- The main HTML entry returns `Cache-Control: no-cache`; hashed assets use long-lived caching. Security response headers are configured.
-- Only `main` is used; no feature branches were created or left for submission.
+## Deployment
 
-## Evidence and reproduction
+- Hosting site: `latch-agent-receipts` in project `gen-lang-client-0444960702`.
+- Quote service: `latch-quotes`, Cloud Run `us-central1`, min instances zero, max instances one, 256 MiB, concurrency 40, request timeout 15 seconds.
+- `scripts/deploy-quotes.sh` deploys only that service. `scripts/deploy-firebase.sh` performs a clean install, tests, production build, and only the named Hosting site deployment.
+- Hosting pins its API rewrite to a Cloud Run revision for reproducible release behavior. Deploy the service before Hosting after server changes.
+- No billing account was added. The service uses the existing project's billing; scale-to-zero and a single instance bound running capacity. This is not a guarantee of zero cost.
 
-See `public/deployment.json`, `public/live-evidence.json`, `docs/TESTING.md`, and the public CI workflow. Browser recovery regressions use deliberately mocked existing receipts and forbid transaction submission. They are distinct from the recorded real testnet trials.
+## Material limits
 
-## Release limits
+Anonymous Vast.ai search worked during integration but is not a promised provider contract; official documentation describes authenticated API access. Optional `VAST_API_KEY` is server-only. Provider access, offer availability, faucet funding and public RPC availability can change.
 
-This is a tested developer release on testnet. Quote inputs are illustrative, the buyer is the verifier, and suppliers must trust its acceptance decision. It is not an independent truth oracle, a live GPU exchange, a stablecoin product, or an independently audited mainnet service. Pricing and demand remain unvalidated; automated trials are not customer traction.
+Retrieval time is not provider update time. Listings are not reservations. GPU source claims are not independently verified. The free marketplace browser and the 0.001 testnet MON adapter payment are distinct; neither purchases compute capacity. Fees and final provider billing can differ.
+
+The buyer authorizes acceptance. Providers must trust buyer fairness. Native testnet MON only; unaudited developer release. No independent security audit, paying customers, external integration traction, or mainnet readiness is claimed.

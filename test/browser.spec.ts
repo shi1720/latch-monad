@@ -43,6 +43,7 @@ test.beforeEach(async ({ page }) => {
     } });
   });
   await page.goto('/');
+  await page.getByRole('button', { name: 'Valid quote', exact: true }).click();
 });
 
 const editor = (page: Page) => page.getByRole('textbox', { name: 'Agent result JSON' });

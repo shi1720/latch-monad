@@ -1,80 +1,35 @@
-# Recording kit
+# Product video narration
 
-Project lead and speaker: Shivam Gupta. Read the scripts verbatim only after confirming that the corresponding flow works. Record the real hosted application and actual Monad transactions. Never speed up or splice a transaction in a way that implies faster settlement. Conceal private keys and unrelated account details. Add captions if possible.
+Actual hosted product footage, real Vast.ai retrieval, and real Monad testnet settlement. Google Neural2 synthesized narration is disclosed; English captions are burned in and separately published. The sandbox rejection segment is explicitly labeled.
 
-## Technical demo :  target 2:35, hard limit 3:00
+## Technical demo
 
-Approximately 325 words. Rehearse once; transaction waits are the main variable. If needed, prepare funded testnet accounts and a fresh job before recording. Show existing real receipts rather than inventing successful transactions during a network outage.
+Meet Latch. Your agent has a budget. Give it a clear definition of done. A successful data request can still return an unusable result. Latch connects the rules, the output, and an inspectable payment.
 
-### Verbatim narration
+Let's fetch real H100 offers from Vast's GPU marketplace. These prices come from the provider's API through our live adapter. Compare the actual location, hourly machine cost, and cost per GPU. Select an offer to inspect its JSON. The timestamp is when Latch retrieved it, not a claim about when the provider changed its price.
 
-“I'm Shivam Gupta, and this is Latch: pay for checked results.
+This selected offer passes our country, price, schema, and freshness checks. We reserve a small reference payment on Monad testnet and accept the result. These are real transactions. The adapter provider receives a withdrawal credit. This payment buys neither GPU capacity nor a reservation. The market data itself is free to browse.
 
-When an agent buys data, a successful response doesn't necessarily mean it received what it asked for. A GPU quote can be from the wrong region, outside the budget, or too old to use.
+Now we test a rejected delivery using an explicitly labeled stale fixture. The freshness check fails, so we do not accept it. After the short deadline, Latch refunds the escrow and withdraws the buyer's credit. Network fees still apply. Watch the separate reserve, refund, and withdrawal confirmations. The buyer can now inspect its recovered funds. No synthetic price is used as a fallback when the live source fails.
 
-Latch connects the acceptance rules, the delivered artifact, and the payment. This reference application purchases structured GPU quote data. It does not reserve or deliver a GPU.
+Open either receipt to inspect the buyer, provider, policy commitment, result digest, and transaction trail. Export the record or independently inspect its explorer links. A retry reconciles the original purchase instead of opening a second payment. The real source details remain in the accepted artifact.
 
-Here are the rules: the region, maximum quoted price, and freshness window. These are visible before payment. The supplier prices in this demonstration are illustrative, so I'm demonstrating acceptance and settlement rather than a live capacity marketplace.
+Developers can reuse the contract and TypeScript SDK in their own agents. The buyer runs the checks and authorizes acceptance. The contract enforces payment authority and expiry. It does not independently verify hardware or guarantee quote availability. Latch. Pay for checked results.
 
-First, I'll inspect a result that meets the policy. The checks pass. I can fund the bounded job on Monad testnet and authorize acceptance. Here is the confirmed transaction and the contract record. The policy and artifact commitments let an application connect the economic receipt to the output it evaluated.
+## Product pitch
 
-Now I'll use a result that fails the policy. The failed check is visible, and I don't accept the delivery. After the job deadline, I'll show the refund transaction and withdraw the credited balance. Refund credit and money arriving back in the wallet are separate steps; Latch makes that distinction explicit.
+An agent can buy data in seconds. Knowing whether that purchase was useful is much harder.
 
-The trust boundary matters. These checks run offchain, and the buyer is the verifier. The contract enforces who can settle and how funds move. It does not prove that a quote is true or that physical GPU capacity exists. Suppliers must still trust the buyer's acceptance decision.
+Latch is led by Shivam Gupta. We're building an acceptance and settlement layer for developers whose agents buy structured data from independent suppliers.
 
-The reusable product is the contract and TypeScript integration surface. Another application can use the same policy checks and receipt format without adopting this console.
+Imagine a compute-sourcing agent asking for a fresh H100 quote in one region. A response arrives, but it's an hour old. The tool call succeeded. The task did not.
 
-Monad gives small, repeated jobs fast EVM settlement. This release uses native testnet MON; stablecoins and independent verification are future work.
+Latch connects the rules, the result, and the payment. The buyer commits a bounded budget and acceptance policy. Its application checks the output. Accepted work creates a provider credit on Monad. Failed purchases can be recovered after expiry. Every outcome has an inspectable receipt.
 
-Latch makes agent spending reviewable: agree on the rules, inspect the result, and connect acceptance to settlement.”
+We start with a narrow customer: developers of research, enrichment, and pricing-monitor workflows. The reusable product is the contract and SDK. The live Vast marketplace adapter makes the workbench useful today: compare real H100 offers, inspect their provenance, and test the settlement lifecycle. We never substitute fake quotes when the source fails.
 
-### Shot list
+The business hypothesis is free infrastructure with paid hosted receipts, supplier adapters, and monitoring. Our next milestone is two external integrations and a thousand measured test jobs, followed by a willingness-to-pay test.
 
-| Time budget | Screen/action | Evidence to capture |
-| --- | --- | --- |
-| 0:00-0:20 | Product overview | Name and real running application |
-| 0:20-0:45 | Policy and example result | Region, price cap, freshness; illustrative-data label |
-| 0:45-1:25 | Passing result and funded acceptance | Wallet approval, confirmed state, explorer receipt |
-| 1:25-2:00 | Failing result; refund; withdraw | Failed check, separate refund and withdrawal confirmations |
-| 2:00-2:20 | Receipt details and trust boundary | Artifact/policy commitments, native MON, buyer verifier |
-| 2:20-2:35 | Product overview / integration panel | Closing statement |
+The buyer remains the verifier. We don't claim to prove real-world GPU delivery. Our focus is clear rules, recoverable execution, and accountable spending.
 
-Refund is available only after expiry. Prepare a short-deadline test job and wait for expiry before the recovery segment. If the rejected-flow transactions exceed the budget, use a previously completed real rejected job and show its refund and withdrawal explorer receipts while explaining the two steps. Clearly state that it is an earlier completed test. The video must remain actual operation, not slides or a code walkthrough.
-
-## Pitch video :  target 1:40, hard limit 2:00
-
-Approximately 235 words. Camera introduction plus a few product shots; this is separate from the technical demo.
-
-### Verbatim narration
-
-“I'm Shivam Gupta, project lead and product owner of Latch.
-
-AI agents are starting to buy tools and data. But a payment receipt answers only one question: did money move? It doesn't answer the question the owner cares about: did my agent get something it could actually use?
-
-Our first use case is buying structured GPU quote data. If the result is stale, outside the requested region, or over the price limit, the agent shouldn't quietly treat it as a successful purchase.
-
-Latch is a developer primitive that connects a declared acceptance policy, a bounded escrow, and an inspectable receipt. The reference application shows passing results, rejected results, Monad settlement, and refund recovery.
-
-We're deliberately precise about trust. The buyer evaluates the result. The contract enforces the payment lifecycle; it doesn't claim to verify real-world GPU delivery.
-
-Existing payment and escrow systems are strong competition. Our wedge is a small, reusable acceptance and receipt workflow for developers buying machine-checkable data from independent suppliers.
-
-The startup hypothesis is open-source infrastructure with paid hosted receipts, supplier adapters, and monitoring. We haven't validated pricing or claimed customer traction. The next milestone is two external application integrations and a thousand measured test jobs, followed by a real willingness-to-pay test.
-
-Monad makes repeated small settlements practical without a long wait between jobs. Latch turns that speed into an accountable purchasing workflow.
-
-Pay for checked results. That's Latch.”
-
-### Shot list
-
-- 0:00-0:12: Shivam on camera; name and project lead title.
-- 0:12-0:40: Real policy and failing-result screen.
-- 0:40-1:05: Real acceptance/refund receipts.
-- 1:05-1:25: Speaker explaining first users and business hypothesis.
-- 1:25-1:40: Running product and closing line.
-
-## Optional advertisement :  approximately 20 seconds
-
-“Your agent bought the data. Was it usable? Latch checks the rules you agreed: region, price, freshness. See the result. Accept the delivery. Follow the payment on Monad. For developers building accountable agent workflows. Latch: pay for checked results.”
-
-Only record this after the mandatory videos. Do not imply audited security, customer adoption, live GPU supply, or universal fraud prevention.
+Latch. Pay for checked results.

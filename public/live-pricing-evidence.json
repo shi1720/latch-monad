@@ -1,0 +1,134 @@
+{
+  "receipts": [
+    {
+      "key": "0x0272b60bf2a23d11225f37d1d0c76ff2b545dae5229d4f290d0f01a641a4ac24",
+      "transactionHash": "0xdc2dcbe7ac5835f248e4d27d7b0d40490f299668b367ece931ae57c83eb7500b",
+      "amount": "0.001",
+      "status": "Refunded",
+      "createdAt": "2026-10-13T06:19:41.316Z",
+      "accepted": false,
+      "chainId": 10143,
+      "hash": "0xdc2dcbe7ac5835f248e4d27d7b0d40490f299668b367ece931ae57c83eb7500b",
+      "resultHash": "0xb4f921daf2afefe07b55c11273ef1084a44abe444d0e6852c5fd74ca74abe76a",
+      "policyHash": "0xe54575f2a6be6a8576b176b523bf0072e79748aa6318286f86935a089aea325d",
+      "requestId": "0x706b71a7d2c236a44846c713fe897de47c0bc80d4c4328de8a081fc5da46716e",
+      "reserveHash": "0xdb77822a355fc177fafa357fa2771f7b59a68765d4bd9cbd1fab6b144fcba5f1",
+      "withdrawalHash": "0x01dbd1f6068587f74254821958e8fa20740804aa2fa90c0d52f941c31af2aafb",
+      "buyer": "0x4f0ea0D28a4087F655e818c135F03470929b2C64",
+      "provider": "0x7303eE693158f0A10491d140A3891B6086704892",
+      "contract": "0xcfeb00b37333b3f4397eed2790e2869a40ffb871",
+      "payload": {
+        "source": "Latch sample supplier: illustrative quotes, not a live market feed",
+        "quotes": [
+          {
+            "id": "quote-h100-01",
+            "gpu": "NVIDIA H100 80GB",
+            "region": "us-east",
+            "priceUsdPerHour": 2.45,
+            "observedAt": "2026-10-13T05:19:14.474Z"
+          }
+        ]
+      },
+      "policy": {
+        "maxAgeSeconds": 300,
+        "maxPriceUsd": 4,
+        "region": "us-east"
+      }
+    },
+    {
+      "key": "0xdb39c77adc98f075a5e147a0fa1f3b9a81a16ec26633540e6aeed72ff3ad14bb",
+      "transactionHash": "0x93e86c70cb70572647360a24ddd26f04331f6478962a990d1701ddd661cc0c8e",
+      "amount": "0.001",
+      "status": "Accepted",
+      "createdAt": "2026-10-13T06:19:03.210Z",
+      "accepted": true,
+      "chainId": 10143,
+      "hash": "0x93e86c70cb70572647360a24ddd26f04331f6478962a990d1701ddd661cc0c8e",
+      "resultHash": "0x3f35bf9277b6c64964aa76511ee26deef40ec979ce706c9cbef33d8efb58d068",
+      "policyHash": "0xe5f3a9f68e7c641d965722ba9c1cbcfec0077fae9acee776b5437ab4aec0c764",
+      "requestId": "0x514a9696e95da1fc0257a9557ba290280330e3eccf7114733fee280bbad67357",
+      "reserveHash": "0x1069af0e119b61b9c97948dbd9ec04d0a9cff9e1422e0977ca0f539b73edaafb",
+      "buyer": "0x4f0ea0D28a4087F655e818c135F03470929b2C64",
+      "provider": "0x7303eE693158f0A10491d140A3891B6086704892",
+      "contract": "0xcfeb00b37333b3f4397eed2790e2869a40ffb871",
+      "payload": {
+        "source": "Vast.ai",
+        "quoteKind": "live-offer",
+        "retrievedAt": "2026-10-13T06:18:29.161Z",
+        "observedAtBasis": "proxy-retrieval-time",
+        "sourceUrl": "https://cloud.vast.ai/",
+        "quotes": [
+          {
+            "id": "vast-46716859",
+            "gpu": "NVIDIA H100 80GB",
+            "gpuVariant": "H100 PCIE",
+            "region": "US",
+            "location": ", US",
+            "numGpus": 2,
+            "totalPriceUsdPerHour": 4.535555555555556,
+            "priceUsdPerHour": 2.267777777777778,
+            "observedAt": "2026-10-13T06:18:29.161Z",
+            "sourceUrl": "https://cloud.vast.ai/",
+            "sourceOfferId": "46716859",
+            "providerVerification": "verified"
+          }
+        ],
+        "provenance": {
+          "upstream": "https://console.vast.ai/api/v0/bundles/",
+          "requestLimit": 100,
+          "upstreamObservationTimestampAvailable": false,
+          "priceBasis": "dph_total / num_gpus; instance compute and configured storage divided by GPU count",
+          "exclusions": "Availability, location and pricing are provider claims. Network usage and other usage-dependent charges may be additional. No GPU reservation or rental is made.",
+          "verificationFilter": "Vast verified=true search filter; not independent verification by Latch",
+          "selectionBasis": "At most 100 source-ranked search results, sorted locally by per-GPU price; not an exhaustive market or best-price guarantee",
+          "truncated": false
+        },
+        "cache": {
+          "hit": false,
+          "ttlSeconds": 30
+        },
+        "filter": {
+          "region": "any"
+        }
+      },
+      "policy": {
+        "maxAgeSeconds": 300,
+        "maxPriceUsd": 4,
+        "region": "any"
+      }
+    }
+  ],
+  "errors": [],
+  "segments": [
+    {
+      "index": 0,
+      "at": 0.003
+    },
+    {
+      "index": 1,
+      "at": 13.611
+    },
+    {
+      "index": 2,
+      "at": 36.961
+    },
+    {
+      "index": 3,
+      "at": 59.449
+    },
+    {
+      "index": 4,
+      "at": 86.857
+    },
+    {
+      "index": 5,
+      "at": 107.21
+    }
+  ],
+  "providerWithdrawal": {
+    "hash": "0x573261694d894afb84c28663528553a3d08af47acfc67f1f7a21be45bb11492d",
+    "amountWei": "6000000000000000",
+    "note": "Aggregate provider credits withdrawn after live pricing integration trials",
+    "confirmed": true
+  }
+}

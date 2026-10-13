@@ -15,9 +15,9 @@ The reference purchase is a structured GPU quote dataset. A row may have a GPU m
 5. The contract enforces the native-MON escrow lifecycle. Events and receipts record economic changes; confirmations must be obtained through RPC before displaying final success.
 6. `public/deployment.json` binds the interface to a real deployment. A chain ID or explorer link alone is not deployment evidence.
 
-The policy fields currently exposed are `maxAgeSeconds`, `maxPriceUsd`, and `region`. The SDK exports `validateResult`, `canonicalHash`, `canonicalJSON`, and `Policy` from the policy implementation, together with `receiptKey(buyer, requestId)` and `monadReader`. Read the type signatures in `sdk/index.ts` before integration. GPU prices are illustrative data, not executable commercial offers.
+The policy fields currently exposed are `maxAgeSeconds`, `maxPriceUsd`, and `region`. The SDK exports `validateResult`, `canonicalHash`, `canonicalJSON`, and `Policy` from the policy implementation, together with `receiptKey(buyer, requestId)` and `monadReader`. Read the type signatures in `sdk/index.ts` before integration. The default prices are real retrieved Vast.ai marketplace observations, not executable reservations or guaranteed future prices.
 
-Current checks require a source string, between 1 and 100 quote rows, nonempty unique IDs, typed fields, finite positive prices, matching region, prices within the ceiling, and timestamps within the freshness limit. Up to five seconds of future timestamp skew is accepted. The reference validator requires the exact GPU string `NVIDIA H100 80GB`; this is a hardcoded model requirement, not a configurable policy field. It does not authenticate the source string or independently verify the existence of that hardware.
+Current checks require a source string, between 1 and 100 quote rows, nonempty unique IDs, typed fields, finite positive prices, matching exact ISO country codes unless the policy selects any country, prices within the ceiling, and timestamps within the freshness limit. Up to five seconds of future timestamp skew is accepted. The reference validator accepts the implemented H100 model family and preserves upstream model variants in normalized output. Read the current model check in `src/policy.ts`; the adapter must not relabel unrelated hardware as H100. The validator does not independently verify the existence of the hardware.
 
 The contract uses pull payments: settlement or refund assigns a credit, and the credited party calls `withdraw` to receive native MON. Do not describe a credit assignment as completed delivery to the wallet. The rejected-job browser flow includes creating the job, refunding it, and withdrawing the credit as three transactions.
 
@@ -55,3 +55,13 @@ Independent contract review; deployment-bytecode verification; monitored RPC red
 ## Validator release agreement
 
 The onchain policy commitment hashes the policy bytes. It does not pin a JavaScript validator implementation. Integrators must agree on the SDK release or Git commit out of band and preserve that version alongside their acceptance receipts. A future policy format can bind a validator version explicitly; this release does not claim to enforce code semantics onchain.
+
+## Live quote adapter
+
+The browser calls same-origin `GET /api/quotes`. Firebase Hosting rewrites the request to a Cloud Run quote service; local Vite proxies `/api` to `127.0.0.1:8080`, served by `npm run start:quotes`. The backend queries Vast.ai, normalizes H100 offers, and caches responses for 30 seconds. It never substitutes synthetic fixtures if the upstream request fails. Keep any optional `VAST_API_KEY` server-side. Anonymous upstream access worked during implementation but is not guaranteed by provider documentation.
+
+The adapter is a trusted data transformation layer. TLS to the upstream and a result hash do not constitute an independently signed provider attestation. `observedAt` means retrieval time, not upstream publication time; cached responses retain that observation rather than pretending a fresh retrieval. A policy freshness pass therefore bounds the age of Latch's observation, not the age or truth of a provider claim.
+
+Normalized `priceUsdPerHour` is `dph_total / num_gpus`. Preserve full-machine hourly cost, GPU count, offer ID, source, and original location alongside it. A per-GPU comparison does not prove that a machine can be rented one GPU at a time. Exact ISO country geography avoids inventing region mappings; the wildcard policy accepts any country and cannot certify locality.
+
+The escrow moves only Latch's native-MON reference fee for the quote artifact. It neither purchases GPU capacity nor transfers funds to Vast.ai. Rate limits, upstream availability, changed schemas, provider authentication requirements, and Cloud Run availability are additional operational dependencies. No availability or latency guarantee is asserted.

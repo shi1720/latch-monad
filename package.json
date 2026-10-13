@@ -14,7 +14,9 @@
     "deploy": "node scripts/deploy.mjs",
     "test:browser": "playwright test",
     "test:hosted": "PLAYWRIGHT_BASE_URL=https://latch-agent-receipts.web.app playwright test",
-    "deploy:firebase": "bash scripts/deploy-firebase.sh"
+    "deploy:firebase": "bash scripts/deploy-firebase.sh",
+    "start:quotes": "node server/index.mjs",
+    "test:quotes": "node --test test/server.test.mjs"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,10 @@
+export type LiveQuote = { id: string; gpu: string; region: string; location: string; priceUsdPerHour: number; observedAt: string; numGpus: number; totalPriceUsdPerHour: number; sourceUrl: string; [key: string]: unknown };
+export type QuoteSnapshot = { source: string; retrievedAt: string; observedAtBasis: string; quotes: LiveQuote[]; [key: string]: unknown };
+export function parseQuoteSnapshot(value: unknown): QuoteSnapshot {
+  if (!value || typeof value !== 'object') throw new Error('The quote service returned an invalid response.');
+  const snapshot = value as QuoteSnapshot;
+  if (snapshot.source !== 'Vast.ai' || !Number.isFinite(Date.parse(snapshot.retrievedAt)) || snapshot.observedAtBasis !== 'proxy-retrieval-time' || !Array.isArray(snapshot.quotes)) throw new Error('The quote response is missing its source or retrieval timestamp.');
+  if (snapshot.quotes.length > 1000 || !snapshot.quotes.every(q => q && typeof q.id === 'string' && q.id.length > 0 && q.gpu === 'NVIDIA H100 80GB' && /^[A-Z]{2}$/.test(q.region) && typeof q.location === 'string' && Number.isFinite(q.priceUsdPerHour) && q.priceUsdPerHour > 0 && Number.isFinite(q.totalPriceUsdPerHour) && q.totalPriceUsdPerHour > 0 && Number.isInteger(q.numGpus) && q.numGpus > 0 && q.numGpus <= 1024 && Math.abs(q.priceUsdPerHour - q.totalPriceUsdPerHour / q.numGpus) <= 1e-9 * Math.max(1, q.priceUsdPerHour) && Number.isFinite(Date.parse(q.observedAt)) && q.observedAt === snapshot.retrievedAt && typeof q.sourceUrl === 'string' && /^https:\/\/([a-z0-9-]+\.)?vast\.ai\//i.test(q.sourceUrl))) throw new Error('The quote service returned incomplete or unsafe offer data. Nothing was selected.');
+  return snapshot;
+}
+export function countryLabel(code: string): string { if (code === 'any') return 'Any country'; if (code === 'us-east') return 'US East · sandbox'; if (code === 'eu-west') return 'Europe West · sandbox'; if (code === 'ap-south') return 'Asia Pacific · sandbox'; try { return new Intl.DisplayNames(['en'], {type:'region'}).of(code.toUpperCase()) || code; } catch { return code; } }

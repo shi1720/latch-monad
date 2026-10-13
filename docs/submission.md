@@ -1,93 +1,51 @@
-# Submission copy and handoff
+## Inspiration
 
-## Project name
+A successful tool call is not the same as useful work. A compute-sourcing agent can receive a stale price, the wrong GPU, or a quote outside its budget. The HTTP request succeeded. The task did not. Latch connects a clear definition of done to a recoverable payment.
 
-Latch
+## What it does
 
-## Tagline
+Latch is an acceptance and settlement primitive for applications buying machine-checkable data. The first application connects to the real Vast.ai GPU marketplace. Users fetch current H100 listings, compare country and per-GPU prices alongside full-machine costs, inspect an offer's source and retrieval time, and select a structured result for validation.
 
-Pay for checked results.
+The buyer sets country, price, and freshness limits. Passing results can be settled on Monad testnet. Rejected purchases can be refunded after expiry. Each outcome has an exportable receipt with policy and result commitments, participants, and transaction evidence. Permanent buyer-scoped request IDs and broadcast recovery prevent retries from opening a second identical purchase.
 
-## Short description
+Market data is free to browse. The 0.001 testnet MON reference payment credits the Latch adapter provider. It does not pay Vast.ai, rent GPUs, or reserve capacity. Freshness measures Latch retrieval time because the upstream does not supply a signed observation timestamp. Availability and pricing remain provider claims.
 
-Latch connects buyer-declared acceptance policies, bounded native-MON escrow, and inspectable receipts for machine-checkable agent work on Monad. Its first application purchases structured GPU quote data and exposes passing checks, rejected results, settlement, and refund recovery.
+## How we built it
 
-## Problem and intended user
+Shivam Gupta leads the product. React, TypeScript, Vite, Lucide, and viem power the interface and client. A dependency-free Node service on Cloud Run queries a fixed, bounded Vast.ai search through a same-origin Firebase Hosting route. It normalizes exact country codes, preserves instance and per-GPU prices, shares concurrent fetches, and caches successful results for 30 seconds. Upstream failures are explicit, with no synthetic or expired-cache fallback.
 
-Developers building agents that purchase external data need more than a successful HTTP response and a payment receipt. Their applications must know whether the delivered output satisfies the task's declared constraints. Latch makes those constraints explicit and connects the accepted artifact to an economic record. The first reference job checks GPU quote region, maximum quoted price, and freshness; it does not purchase or verify physical GPU capacity.
+The reusable output is an immutable Solidity escrow and TypeScript SDK. The SDK reserves policy and budget before requesting supplier data, checks the policy commitment, then authorizes acceptance. A live quote integration example selects the cheapest conforming returned offer. Pull withdrawals and reentrancy protection separate credits from transfers.
 
-## What we built
+Substantial AI assistance was used for implementation, research, testing, documentation, and narrated media. It is disclosed in the repository. Automated trials are implementation evidence, not customer traction or an independent audit.
 
-A reusable settlement contract, deterministic TypeScript policy checks, integration helpers, and a reference application. The buyer funds a bounded job, evaluates the delivered result offchain, and authorizes settlement. Rejected or expired work can follow the contract's recovery path. Pull credits require withdrawal before funds reach the recipient's wallet.
+## Challenges we ran into
 
-## Monad integration
+Browser CORS prevented direct access to the provider API. We built a controlled server adapter instead of exposing credentials or relying on screenshots of prices. Comparing multi-GPU machines required preserving the full-machine price and clearly distinguishing it from a normalized per-GPU comparison unit.
 
-The settlement lifecycle runs on Monad testnet using native MON. See **`public/deployment.json`** for the actual deployment address and transaction when available. The interface should link real receipts to the testnet explorer. Monad's fast EVM settlement suits repeated small jobs; no throughput benchmark or guaranteed transaction latency is claimed.
+A transaction can succeed after the client loses its confirmation. Opening a new request on retry could pay twice. We persist broadcast hashes before polling and reconcile the original contract state. Actual Monad testing also exposed signing and account-state timing issues that isolated local tests did not reveal.
 
-## Track
+## Accomplishments that we're proud of
 
-**Trust, Identity & AI Infrastructure.** The primary output is a reusable policy/settlement primitive for other applications. The GPU quote console is the reference integration rather than a standalone GPU exchange.
+The hosted application now connects real GPU market data to deterministic checks and actual Monad settlement. Users can inspect source provenance, filter offers, export data and receipts, and recover rejected purchases. Sandbox failure fixtures are explicitly labeled and separate from the real feed.
 
-## Differentiation
+Tests cover source normalization, malformed data, timeouts, cache behavior, query abuse, unavailable sources, authorization, replay protection, expiry boundaries, hostile withdrawal callbacks, SDK recovery, receipt export, storage failures, keyboard access, and responsive layouts. The demo shows fresh live data and real testnet transactions.
 
-Agent payments and agent escrow already exist. Latch focuses on declared acceptance checks for structured artifacts and on making the policy, delivered output, and economic outcome inspectable together. It does not claim to invent escrow or solve subjective evaluation.
+## What we learned
 
-## Trust and current limitations
+Useful agent payments need visible rules, provenance, explicit settlement authority, and recovery. A fresh retrieval is different from a fresh provider observation. A policy hash commits to bytes, not truth. The buyer remains the verifier, and suppliers must trust its acceptance decision. Good infrastructure makes these boundaries legible.
 
-The buyer is the verifier. Offchain checks can detect policy violations but do not prove source truth. The supplier must trust the buyer to release payment for valid work. Native testnet MON is the only implemented asset; stablecoin support, independent verification, x402 integration, and production audits are not claimed. Demonstration quote prices are illustrative and are not live provider offers. The code is an unaudited prototype, not a guarantee of production security.
+## What's next
 
-## Team and AI disclosure
+Our first intended customer is a developer of research, enrichment, or compute-pricing workflows buying structured results from independent suppliers. The commercial hypothesis is free open-source contracts and SDK, with paid hosted receipt monitoring, maintained supplier adapters, and operational support. Demand and pricing remain unvalidated.
 
-Shivam Gupta is project lead and product owner. The project uses substantial OpenAI Codex assistance for research, implementation, tests, documentation, and demo preparation. No specific human implementation contribution should be added unless Shivam actually performed it. The repository records build provenance and dependency attribution.
+Next milestones are two external developer integrations and 1,000 measured jobs, tracking rejected outputs, recovery success, API availability, and willingness to pay. Authenticated supplier envelopes, stablecoin settlement, independent verification, and a security review are launch gates for material funds.
 
-## Traction and next step
+## Access and deployment
 
-No external customer traction or developer adoption is claimed. Automated checks and testnet transactions are engineering evidence rather than users or revenue. The next milestone is two independently operated application integrations and 1,000 measured test jobs, followed by a willingness-to-pay experiment for hosted receipts and monitoring.
+Product: https://latch-agent-receipts.web.app
+Source and setup: https://github.com/shi1720/latch-monad
+Monad testnet chain ID: 10143
+Contract: 0xcfeb00b37333b3f4397eed2790e2869a40ffb871
+Deployment transaction: 0xf818227f6219893732734b4d260d1edb776a0cd91b22e9dbd6b930355e8918d3
 
-## Final links :  fill from verified results
-
-| Required item | Current source of truth |
-| --- | --- |
-| Public GitHub repository | Verify the actual published repository; planned slug is not publication evidence |
-| Live product URL | Verify HTTPS hosting and a fresh browser session |
-| Contract address and deployment transaction | `public/deployment.json`; pending if absent |
-| Technical demo, maximum 3 minutes | Public video URL after recording/upload |
-| Pitch video, maximum 2 minutes | Public video URL after recording/upload |
-| Logo, PNG/JPEG/WEBP under 3 MB | Use the final exported logo and inspect file size |
-| Judge access | Public browsing; an EVM wallet and testnet MON for writes unless the deployed app provides a separately explained flow |
-
-## Submission checklist
-
-- [ ] Confirm participation eligibility and account/team registration personally; do not infer eligibility from location or name.
-- [ ] Confirm only one project and one primary track are entered.
-- [ ] Check the live submission website's recorded deadline. Supplied deadline October 13, 2026, 11:59 PM ET corresponds to October 14, 2026, 9:29 AM IST.
-- [ ] Public repository is readable while signed out, includes source, lockfile, MIT license, attribution, AI disclosure, and genuine build-window commits.
-- [ ] Fresh setup with `npm ci`, tests, build, and documented deployment succeeds.
-- [ ] Actual Monad deployment metadata and transaction receipts are present.
-- [ ] Hosted product loads while signed out and distinguishes preview fixtures from real chain writes.
-- [ ] Passing job settlement and rejected-job refund plus withdrawal have been demonstrated with real transactions.
-- [ ] Technical video is public and no longer than 3:00; pitch is public and no longer than 2:00.
-- [ ] Narration matches shipped behavior; no invented customers, volume, partnerships, security assurance, or human contributions.
-- [ ] No keys, credentials, private customer data, or sensitive browser content appear in source or videos.
-- [ ] Logo is a supported image format and below 3 MB.
-- [ ] Form submitted before the website deadline; save the confirmation and revisit the recorded submission to verify all links.
-
-Sponsor bounties should be selected only after meeting their actual published requirements. This release does not claim a bounty merely because it uses Monad or can support a future integration.
-
-## Verified build links
-
-- Source: [GitHub repository](https://github.com/shi1720/latch-monad)
-- Primary product: [Firebase hosted application](https://latch-agent-receipts.web.app)
-- Secondary mirror: [Sites hosted application](https://latch-agent-receipts.sg127977958.chatgpt.site)
-- Contract: https://testnet.monadscan.com/address/0xcfeb00b37333b3f4397eed2790e2869a40ffb871
-- Deployment transaction: https://testnet.monadscan.com/tx/0xf818227f6219893732734b4d260d1edb776a0cd91b22e9dbd6b930355e8918d3
-- Real success/refund/withdrawal evidence: `public/live-evidence.json`
-- Logo: `public/logo.png`
-
-Video links and participant declarations remain incomplete until supplied by Shivam. Do not treat a recorded silent screen capture as an uploaded, narrated public submission video.
-
-## Hosting and submission status
-
-Firebase project creation was blocked by project quota. Hosting therefore uses the newly created isolated `latch-agent-receipts` site in the existing defaultGemini project (`gen-lang-client-0444960702`). The deployment targets only that named site; no other deployment was modified. See `firebase.json` and `scripts/deploy-firebase.sh` for the precise target.
-
-The user-provided DevpostRice route redirected to closed submission pages. No submission fields were saved and no completed submission is claimed. Prepared story copy, judge testing instructions, narration, captions, and YouTube metadata are available in the sibling `outputs/submission/` deliverables folder. Public video URLs and an accepted submission confirmation remain separate requirements.
+No login or paid API key is required for browsing and local checks. For testnet writes, connect an EVM wallet or use the browser's test-only wallet. Faucet availability is external. Never send valuable assets to the browser key or unaudited testnet contract. Anonymous marketplace search currently works but the provider may require server-side API authentication later; failures remain visible.

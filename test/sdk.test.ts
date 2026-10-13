@@ -5,6 +5,7 @@ import { createPublicClient, createWalletClient, custom, parseEther, keccak256, 
 import { privateKeyToAccount } from 'viem/accounts';
 import { compile } from '../scripts/compile.mjs';
 import { createLatchClient, LatchPendingTransactionError } from '../sdk/client.ts';
+import { purchaseLiveQuote } from '../scripts/example-live-quote-agent.ts';
 import { makeSample } from '../src/policy.ts';
 
 test('SDK reuses committed requests, validates policy, rejects bad data, refunds and recovers from confirmation timeout', async () => {
@@ -38,6 +39,9 @@ test('SDK reuses committed requests, validates policy, rejects bad data, refunds
     assert.equal(completed.job.status, 'Accepted');
     assert.equal((await client.complete({ key: opened.key, policy, payload })).alreadySettled, true);
     assert.equal(broadcasts.length, 2);
+    const recovered = await purchaseLiveQuote({walletClient, publicClient, escrow, abi:artifact.abi}, input, {load:async()=>payload,save:async()=>{throw Error('Accepted recovery must not overwrite artifact')}});
+    assert.deepEqual((recovered as any).payload,payload);
+    await assert.rejects(purchaseLiveQuote({walletClient, publicClient, escrow, abi:artifact.abi},input,{load:async()=>null,save:async()=>{}}),/committed artifact is unavailable/);
     await assert.rejects(client.complete({ key: opened.key, policy, payload: { ...payload, source: 'different' } }), /different result/);
 
     // Force timeout AFTER real open broadcast; retry must find the same mined request.

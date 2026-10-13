@@ -41,10 +41,26 @@ Concurrent calls within one client instance for the same key are rejected. Acros
 ## Trust and money boundaries
 
 - This prototype uses native MON, with integer wei amounts. On Monad testnet these are test funds. It does not implement ERC-20 or mainnet stablecoin payments.
-- The policy's `maxPriceUsd` caps each supplied GPU rental quote in USD per GPU-hour. It does **not** cap the purchase deposit; the caller explicitly sets `amount` and should enforce its own spending budget before `open`.
+- The policy's `maxPriceUsd` caps each normalized quote in USD per GPU-hour, computed by the live adapter as upstream `dph_total / num_gpus`. Preserve full-machine cost and GPU count; the normalization does not make a single GPU independently rentable. It does **not** cap the purchase deposit; the caller explicitly sets `amount` and should enforce its own spending budget before `open`.
 - A schema, region, timestamp, or price check evaluates supplier claims. It does not independently prove capacity, price truth, timestamp truth, or delivery. The buyer controls acceptance and can withhold it; providers must trust that behavior. No dispute oracle exists.
 - Acceptance creates provider credit; expiry refund creates buyer credit. `withdraw()` releases **all** credits belonging to the connected account, not just one receipt. A buyer cannot withdraw the provider's credit.
 - Supply clients connected to the same network. Contract addresses and receipt keys are network-specific; store chain ID and escrow address with your purchase records.
 - This is tested prototype code, not an independently audited financial protocol. Review and audit before using real customer funds.
 
 Run `npx tsx --test test/sdk.test.ts` for the local-chain integration test, including an actual broadcast followed by a simulated RPC confirmation timeout and safe resume.
+
+## Use real quote data
+
+The reference backend exposes `GET /api/quotes` and returns normalized real H100 offers from Vast.ai. In a supplier integration, reserve the intended fee with `open`, retrieve the artifact, then pass the chosen artifact and unchanged policy to `complete`. The UI may preflight a fetched artifact first for usability; that order is not a proof of supplier execution after escrow.
+
+Use exact ISO country codes for `region`, or the policy's any-country wildcard selection. Do not infer a US East region from an unknown US location. Quote retrieval timestamps indicate when the adapter received data; cached responses retain the original timestamp. The service caches for 30 seconds and returns an error when it cannot retrieve usable upstream data, rather than returning fixture prices.
+
+Run the local backend with `npm run start:quotes`, then `npm run dev` in another terminal. The Vite `/api` proxy targets `127.0.0.1:8080`. In production, Firebase's same-origin API rewrite targets Cloud Run. Set optional `VAST_API_KEY` in the backend environment only. Anonymous access was observed working, not guaranteed.
+
+The native-MON escrow amount is a Latch reference fee for data acceptance. It is distinct from the USD hourly compute quote, does not rent or reserve capacity, and does not pay Vast.ai.
+
+### Live quote purchase
+
+`fetchLiveQuote(policy)` reads the deployed adapter, preserves provenance, and selects the cheapest returned offer that passes the policy. It does not claim a global best price. It fails on invalid, stale, unavailable, or nonconforming results without substituting a fixture. See `scripts/example-live-quote-agent.ts` for reserve-before-fetch integration with the existing durable purchase and broadcast callback. If data acquisition fails, preserve the original job and retry or refund after expiry; do not create a new request ID.
+
+The live example requires an application-owned durable artifact store. It saves the exact payload before acceptance, reuses that payload on retry, and verifies its committed hash when recovering an already accepted job. Losing a paid artifact is a storage failure, not a reason to open a second purchase. A stale saved result remains subject to the original freshness policy and expiry recovery.

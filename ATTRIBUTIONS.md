@@ -21,7 +21,7 @@ Exact installed versions and transitive dependencies are recorded in `package-lo
 | Ganache | Local EVM testing | https://github.com/trufflesuite/ganache | MIT |
 | Playwright | Browser verification | https://github.com/microsoft/playwright | Apache-2.0 |
 
-No claim is made to the Monad or hackathon marks. Third-party names appear solely to explain compatibility, deployment, or market context. GPU quote fixtures, if shown in demonstration mode, are synthetic examples and are not live provider offers.
+No claim is made to the Monad or hackathon marks. Third-party names appear solely to explain compatibility, deployment, or market context. The default quote data is retrieved from Vast.ai marketplace offers. Original offer identity, hardware variant, geography, and pricing attribution should be preserved. Test fixtures and deliberately modified rejection examples are testing inputs and must not be represented as unchanged provider offers. Latch is not affiliated with or endorsed by Vast.ai.
 
 ## Research references
 
@@ -36,6 +36,14 @@ These references informed positioning. Latch does not claim to implement or inte
 
 ## Media and typography
 
-Product narration uses the Andrew neural voice through the `edge-tts` client. It is synthesized narration, not a recording or clone of Shivam Gupta. Demo footage records actual product operation. Captions and the logo graphic were produced from project-owned text and code.
+Current product narration uses Google Cloud Text-to-Speech `en-US-Neural2-D`, with SSML timing marks for captions. The earlier video used the Andrew voice through `edge-tts`. It is synthesized narration, not a recording or clone of Shivam Gupta. Demo footage records actual product operation. Captions and the logo graphic were produced from project-owned text and code.
 
 The interface requests DM Sans and Manrope through Google Fonts. Their font families are distributed under the SIL Open Font License; no paid stock imagery is used.
+
+## Vast.ai data source
+
+Real pricing data comes from [Vast.ai's search offers API](https://docs.vast.ai/api-reference/search/search-offers), with cost semantics explained in [Vast.ai pricing documentation](https://github.com/vast-ai/docs/blob/main/guides/pricing.mdx). These are provider-owned marketplace observations, not Latch-generated offers. No broad redistribution license or commercial endorsement is asserted by this attribution.
+
+The adapter's retrieval timestamp is not an upstream update timestamp. Its normalized per-GPU hourly value divides the listed machine total by GPU count and does not imply that one GPU can be rented separately. Latch's testnet reference fee pays for acceptance of the data artifact and is not a GPU rental payment or a payment to Vast.ai.
+
+The server supports optional `VAST_API_KEY`. Anonymous searches were observed to work during implementation, but official examples use authentication and anonymous access is not guaranteed.
